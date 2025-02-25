@@ -1,3 +1,7 @@
 # src
 
-add_executable(main hello.swift)
+add_subdirectory("modules")
+
+add_executable(main)
+target_sources(main PRIVATE hello.swift)
+target_link_libraries(main dsa)

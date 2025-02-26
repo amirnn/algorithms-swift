@@ -1,7 +1,7 @@
 # src/modules
 
 
-add_library(dsa)
+add_library(dsa STATIC)
 
 target_sources(dsa 
 PRIVATE 

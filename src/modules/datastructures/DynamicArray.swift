@@ -1,4 +1,4 @@
-class DynamicArray<T>: AList {
+class DynamicArray<T>: IList {
   let initialBufferSize: Int = 2
   let bufferExtensionShrinkingScale: Int = 2
   let minimumNumberOfElementsToShrinkRation: Int = 4

@@ -4,7 +4,7 @@
 add_library(dsa STATIC)
 
 target_sources(dsa 
-PRIVATE 
+PUBLIC 
 # datastructures
 ${CMAKE_CURRENT_SOURCE_DIR}/datastructures/IList.swift
 ${CMAKE_CURRENT_SOURCE_DIR}/datastructures/DoublyLinkedList.swift

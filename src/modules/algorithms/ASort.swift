@@ -1,7 +1,7 @@
 protocol ASort {
   associatedtype T: Comparable
   var data: (any ISortableList)? { get }
-  mutating func Sort(list: any ASortableList)
+  mutating func Sort(list: any ISortableList)
   func isSorted() -> Bool
 }
 

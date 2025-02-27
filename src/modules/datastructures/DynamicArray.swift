@@ -29,7 +29,11 @@ class DynamicArray<T>: IList {
   }
 
   private func actualIndex(_ index: Int) -> Int {
-    return 0
+    let indexMod: Int = index % bufferSize;
+    let headMod: Int = head % bufferSize;
+    let secondMod: Int = (headMod + bufferSize) % bufferSize;
+    let actualIndex: Int = (indexMod + secondMod) % bufferSize;
+    return actualIndex;
   }
 
   private func boundSizeCheck(index: Int) throws {

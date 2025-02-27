@@ -29,19 +29,19 @@ class DynamicArray<T>: IList {
   }
 
   private func actualIndex(_ index: Int) -> Int {
-    let indexMod: Int = index % bufferSize;
-    let headMod: Int = head % bufferSize;
-    let secondMod: Int = (headMod + bufferSize) % bufferSize;
-    let actualIndex: Int = (indexMod + secondMod) % bufferSize;
-    return actualIndex;
+    let indexMod: Int = index % bufferSize
+    let headMod: Int = head % bufferSize
+    let secondMod: Int = (headMod + bufferSize) % bufferSize
+    let actualIndex: Int = (indexMod + secondMod) % bufferSize
+    return actualIndex
   }
 
-  private func boundSizeCheck(index: Int) throws {
+  private func boundSizeCheck(index: Int) throws(ListError) {
     if index < 0 || index > size - 1 {
-      throw fatalError("Index out of bounds!")
+      throw ListError.IndexOutOfBounds()
     }
     if isEmpty() {
-      throw fatalError("List is empty!")
+      throw ListError.IsEmpty()
     }
   }
 
@@ -112,24 +112,27 @@ class DynamicArray<T>: IList {
     return temp
   }
 
-  func pushAt(index: Int, item: T) {
-    do {
-      try boundSizeCheck(index: index)
-    } catch {
-      print("\(error)")
-      return
-    }
-    if index <= size / 2 {
+  func pushAt(index: Int, item: T) throws(ListError) {
+    if index == 0 {
       pushFront(item: item)
-      for i in 0..<index {
-        exchange(source: i, target: i + 1)
+      return
+    } else if index > 0 && index < size {
+      if index <= size / 2 {
+        pushFront(item: item)
+        for i in 0..<index {
+          exchange(source: i, target: i + 1)
+        }
       }
-    } else {
+      else {
       pushBack(item: item)
       for i in (index..<size).reversed() {
         exchange(source: i, target: i - 1)
       }
     }
+    }
+    else {
+      throw ListError.IndexOutOfBounds()
+    } 
   }
 
   func popAt(index: Int) -> T? {

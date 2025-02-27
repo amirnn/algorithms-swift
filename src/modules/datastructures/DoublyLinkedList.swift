@@ -24,7 +24,8 @@ class DoublyLinkedList<T>: IList {
     var current: Node
     if index <= size / 2 {
       current = head!
-      for _ in 1..<size {
+      if (index == 0) { return current } // stupid but needed since if index < 1 the range 1...index fails!
+      for _ in 1...index {
         current = current.next!
       }
     } else {
@@ -110,7 +111,7 @@ class DoublyLinkedList<T>: IList {
     if index == 0 {
       pushFront(item: item)
       return
-    } else if index < size {
+    } else if index > 0 && index < size {
       let newNode = Node(value: item)
       let oldNode = nodeAt(index)!
       let prev = oldNode.prev!
